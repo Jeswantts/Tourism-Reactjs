@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aT1IWKUhQTxNsqfWNBQou8jxk1Hglrmz1qkp2nwfhzifFunLn5KgEI/dgG9B146vZxiM1wADWbITIBb6wygw1A==",
+  "dgSpecHash": "KsXZzWL8UiCbnzHIUlC5sk0Xd1CHjT+0rmpqQN0ncL4BL/P8W4HQ/vrGxtKDjltQllqGHWQVTgKjyc9TzpWOUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Suchitra\\source\\repos\\Kanini-Tourism\\Back-end\\Tourism\\Authentication\\Authentication.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Suchitra\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Suchitra\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Suchitra\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Suchitra\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.20\\microsoft.aspnetcore.authentication.jwtbearer.6.0.20.nupkg.sha512",
     "C:\\Users\\Suchitra\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Suchitra\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Suchitra\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

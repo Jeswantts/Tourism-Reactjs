@@ -86,3 +86,4 @@ C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Hotel\obj\Debug\n
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Hotel\obj\Debug\net6.0\Hotel.pdb
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Hotel\obj\Debug\net6.0\Hotel.genruntimeconfig.cache
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Hotel\obj\Debug\net6.0\ref\Hotel.dll
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Hotel\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

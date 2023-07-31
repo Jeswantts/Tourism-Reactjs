@@ -86,3 +86,4 @@ C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Authentication\ob
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Authentication\obj\Debug\net6.0\Authentication.pdb
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Authentication\obj\Debug\net6.0\Authentication.genruntimeconfig.cache
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Authentication\obj\Debug\net6.0\ref\Authentication.dll
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Authentication\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

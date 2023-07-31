@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Profile.Context;
 using Profile.Interface;
 using Profile.Models;
 using Profile.Models.DTO;
 using Profile.Models.Helpers;
+using System.IdentityModel.Tokens.Jwt;
 using System.Numerics;
+using System.Security.Claims;
+using System.Text;
 
 namespace My_Profile.Service
 {
@@ -12,10 +16,12 @@ namespace My_Profile.Service
     {
         private readonly IProfile repo;
         private readonly ProfileContext context;
-        public ProfileService(IProfile _repo, ProfileContext context)
+        private readonly IConfiguration _configuration;
+        public ProfileService(IProfile _repo, ProfileContext context, IConfiguration configuration)
         {
             repo = _repo;
             this.context = context;
+            _configuration = configuration;
         }
         public async Task<Login_DTO> GetLoginById(int id)
         {
@@ -183,6 +189,52 @@ namespace My_Profile.Service
             };
 
             return profileDTO;
+        }
+
+
+        public async Task<string> Login(Auth_DTO auth_DTO)
+        {
+            if (auth_DTO != null && !string.IsNullOrEmpty(auth_DTO.email_id) && !string.IsNullOrEmpty(auth_DTO.password))
+            {
+                var user = await GetUser(auth_DTO.email_id);
+                if (user != null && PasswordHasher.VerifyPassword(auth_DTO.password, user.password))
+                {
+                    var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim("email_id", user.email_id),
+                    new Claim("UserId", user.customer_id.ToString()),
+                    new Claim(ClaimTypes.Role, "user")
+
+                };
+
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var token = new JwtSecurityToken(
+                        _configuration["Jwt:Issuer"],
+                        _configuration["Jwt:Audience"],
+                        claims,
+                        expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:TokenExpirationMinutes"])),
+                        signingCredentials: signIn);
+
+                    return new JwtSecurityTokenHandler().WriteToken(token);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private async Task<Profiles> GetUser(string email_id)
+        {
+            return await context.profiles.FirstOrDefaultAsync(u => u.email_id == email_id);
         }
 
     }

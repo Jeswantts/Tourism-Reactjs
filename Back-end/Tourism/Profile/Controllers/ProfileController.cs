@@ -13,6 +13,7 @@ namespace Profile.Controllers
         private readonly IProfile _profileRepo;
         private readonly IDTO _loginService;
 
+
         public ProfileController(IProfile profileRepo, IDTO loginService)
         {
             _profileRepo = profileRepo;
@@ -159,6 +160,28 @@ namespace Profile.Controllers
             }
 
             return Ok(profileDto);
+        }
+
+        [HttpPost("login/Authenticator")]
+        public async Task<IActionResult> Login(Auth_DTO userLoginDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = await _loginService.Login(userLoginDTO);
+
+                if (!string.IsNullOrEmpty(token))
+                {
+                    return Ok(token);
+                }
+                else
+                {
+                    return BadRequest("Invalid credentials");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
     }
 }

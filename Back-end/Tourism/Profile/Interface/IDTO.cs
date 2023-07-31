@@ -15,5 +15,7 @@ namespace Profile.Interface
         public Task<ChangeImg_DTO> UpdateImage(int id, ChangeImg_DTO changeImg_DTO);
         public Task<ChangeImg_DTO> ViewImage(int id);
         public Task<Register_DTO> Register(Register_DTO register_DTO);
+
+        public Task<string> Login(Auth_DTO auth_DTO);
     }
 }
