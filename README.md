@@ -6,15 +6,23 @@ The product should communicate securely with the backend API calls to populate t
 The stakeholders of this product are Administrator, Travel agent representing Travel Agencies and the Travelers. The roles of the stakeholders are listed below:
 
 1. Administrator :
+
     a. Entity who activate/deactivate the Travel agents
+   
     b. Post the image gallery
    
 3. Travel Agents :
+   
     a. Register with the Kanini Tourism portal and waits for the administrator to approve his registration
+   
     b. After approval, the agent can login the portal and upload the offerings of the agency, postings of the images of places, rates for tourism per day/hour/tour pack,           their contact details, Itinerary details, food and accommodation details etc.,
    
 5. Travelers :
+
     a. Register with the portal
+   
     b. Plan and book their trip
+   
     c. Download the billing details after booking the trip successfully
+   
     d. Give feedback/testimony
