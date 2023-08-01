@@ -8,6 +8,7 @@ namespace Profile.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class ProfileController : ControllerBase
     {
         private readonly IProfile _profileRepo;
@@ -26,14 +27,9 @@ namespace Profile.Controllers
             return await _profileRepo.GetProfile();
         }
 
-        [HttpPost("All/reg")]
-        public Profiles Post([FromForm] Profiles profile, IFormFile imageFile)
-        {
-            return _profileRepo.PostProfile(profile, imageFile);
-        }
 
         [HttpPut("{Name}")]
-        public Profiles? PutHotels(string Name, Profiles profile)
+        public Profiles? PutProfile(string Name, Profiles profile)
         {
             return _profileRepo.PutProfile(Name, profile);
         }

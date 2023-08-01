@@ -9,39 +9,14 @@ namespace My_Profile.Service
     public class ProfileRepo : IProfile
     {
         private readonly ProfileContext _pContext;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProfileRepo(ProfileContext con, IWebHostEnvironment webHostEnvironment)
+        public ProfileRepo(ProfileContext con)
         {
             _pContext = con;
-            _webHostEnvironment = webHostEnvironment;
 
         }
         public async Task<ICollection<Profiles>> GetProfile()
         {
             var Profile = await _pContext.profiles.ToListAsync();
-            return Profile;
-        }
-        public Profiles PostProfile([FromForm] Profiles Profile, IFormFile imageFile)
-        {
-            if (imageFile == null || imageFile.Length == 0)
-            {
-                throw new ArgumentException("Invalid file");
-            }
-
-            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            var filePath = Path.Combine(uploadsFolder, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                imageFile.CopyToAsync(stream);
-            }
-
-            Profile.image = fileName;
-
-            _pContext.profiles.Add(Profile);
-            _pContext.SaveChanges();
-
             return Profile;
         }
         public Profiles PutProfile(string Name, Profiles Profile)

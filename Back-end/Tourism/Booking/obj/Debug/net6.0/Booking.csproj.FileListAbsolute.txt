@@ -87,3 +87,8 @@ C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\obj\Debug
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\obj\Debug\net6.0\Booking.genruntimeconfig.cache
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\obj\Debug\net6.0\ref\Booking.dll
 C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Profile.deps.json
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Profile.runtimeconfig.json
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Profile.exe
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Profile.dll
+C:\Users\Suchitra\source\repos\Kanini-Tourism\Back-end\Tourism\Booking\bin\Debug\net6.0\Profile.pdb

@@ -1274,6 +1274,25 @@
             "rid": "win"
           }
         }
+      },
+      "Profile/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.20",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "Swashbuckle.AspNetCore": "6.2.3"
+        },
+        "compile": {
+          "bin/placeholder/Profile.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Profile.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -3790,6 +3809,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Profile/1.0.0": {
+      "type": "project",
+      "path": "../Profile/Profile.csproj",
+      "msbuildProject": "../Profile/Profile.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3798,6 +3822,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.20",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.9",
+      "Profile >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -3828,7 +3853,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Suchitra\\source\\repos\\Kanini-Tourism\\Back-end\\Tourism\\Profile\\Profile.csproj": {
+              "projectPath": "C:\\Users\\Suchitra\\source\\repos\\Kanini-Tourism\\Back-end\\Tourism\\Profile\\Profile.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

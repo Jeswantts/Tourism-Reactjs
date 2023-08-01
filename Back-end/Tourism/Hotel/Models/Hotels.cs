@@ -23,9 +23,6 @@ namespace Hotel.Models
 
         public string? detailed_location { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Price must be a non-negative number")]
-        public int price { get; set; }
-
         public string? amenities { get; set; }
 
         public string? room_types { get; set; }

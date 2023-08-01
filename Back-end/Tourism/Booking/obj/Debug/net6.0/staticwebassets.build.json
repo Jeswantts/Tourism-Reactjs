@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "fj9BSwB84pIc80wnTK6P6lY/R41KYfHwSbzHZsztgIQ=",
+  "Hash": "EVhrRKpHkwsuWxVuSxVwiAbCSSprmYR3M5WQWBUD4Gk=",
   "Source": "Booking",
   "BasePath": "_content/Booking",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Suchitra\\source\\repos\\Kanini-Tourism\\Back-end\\Tourism\\Profile\\Profile.csproj",
+      "Version": 2,
+      "Source": "Profile",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

@@ -7,7 +7,6 @@ namespace Profile.Interface
     {
         public Task<ICollection<Profiles>> GetProfile();
 
-        public Profiles PostProfile([FromForm] Profiles Profiles, IFormFile imageFile);
         public Profiles PutProfile(string Name, Profiles Profiles);
         public Profiles DeleteProfile(string Name);
 
