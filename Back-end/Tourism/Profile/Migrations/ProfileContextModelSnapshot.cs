@@ -22,6 +22,40 @@ namespace Profile.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Profile.Models.Agent", b =>
+                {
+                    b.Property<int>("customer_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("customer_id"));
+
+                    b.Property<string>("agency_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("agent_mobile")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("agent_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("customer_id");
+
+                    b.ToTable("agent");
+                });
+
             modelBuilder.Entity("Profile.Models.Profiles", b =>
                 {
                     b.Property<int>("customer_id")

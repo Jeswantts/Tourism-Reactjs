@@ -11,9 +11,9 @@ namespace Profile.Controllers
 
     public class ProfileController : ControllerBase
     {
-        private readonly IService _loginService;
+        private readonly IProService _loginService;
 
-        public ProfileController(IService loginService)
+        public ProfileController(IProService loginService)
         {
             _loginService = loginService;
         }
@@ -35,6 +35,8 @@ namespace Profile.Controllers
         {
             return await _loginService.GetProfileById(customer_id);
         }
+
+        
 
         [HttpGet("login/{id}")]
         public async Task<ActionResult<Login_DTO>> GetLoginById(int id)
@@ -95,7 +97,6 @@ namespace Profile.Controllers
 
             if (doctorDto == null)
             {
-                // Doctor not found or old password is incorrect
                 return BadRequest("Invalid old password.");
             }
 
@@ -126,7 +127,7 @@ namespace Profile.Controllers
 
             try
             {
-                Register_DTO loginDTO = await _loginService.Register(registerDto);
+                Register_DTO loginDTO = await _loginService.RegisterUser(registerDto);
                 return Ok(loginDTO);
             }
             catch (ApplicationException ex)

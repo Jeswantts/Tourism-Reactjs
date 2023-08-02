@@ -12,7 +12,7 @@ using System.Text;
 
 namespace My_Profile.Service
 {
-    public class ProfileService : IService, IProfile
+    public class ProfileService : IProService, IProfile
     {
         private readonly IProfile repo;
         private readonly IConfiguration _configuration;
@@ -37,7 +37,6 @@ namespace My_Profile.Service
 
         public async Task<Login_DTO> PutLogin(Login_DTO dto, int id)
         {
-
             var profile = await repo.GetProfileById(id);
 
             if (dto.mobile_number != null)
@@ -152,24 +151,33 @@ namespace My_Profile.Service
             return changeImg_DTO;
         }
 
-        public async Task<Register_DTO> Register(Register_DTO register_DTO)
+        public async Task<Register_DTO> RegisterUser(Register_DTO register_DTO)
         {
-            var profile = new Profiles
+            if (register_DTO.role == "user")
             {
-                customer_id = register_DTO.customer_id,
-                email_id = register_DTO.email_id,
-                password = PasswordHasher.HashPassword(register_DTO.password),
-            };
+                var profile = new Profiles
+                {
+                    customer_id = register_DTO.customer_id,
+                    email_id = register_DTO.email_id,
+                    password = PasswordHasher.HashPassword(register_DTO.password),
+                };
 
-            await repo.PostProfile(profile);
+                await repo.PostProfile(profile);
 
-            var loginDTO = new Register_DTO
+                var loginDTO = new Register_DTO
+                {
+                    customer_id = profile.customer_id,
+                    email_id = profile.email_id,
+                    password = profile.password,
+                    role = register_DTO.role // Preserve the role in the returned DTO
+                };
+
+                return loginDTO;
+            }
+            else
             {
-                customer_id = profile.customer_id,
-                email_id = profile.email_id,
-                password = profile.password
-            };
-            return loginDTO;
+                throw new ArgumentException("Invalid role.");
+            }
         }
 
         public async Task<ChangeImg_DTO> ViewImage(int id)
@@ -255,9 +263,11 @@ namespace My_Profile.Service
             return await repo.GetProfileById(customer_id);
         }
 
-        public Task<Profiles> PostProfile(Profiles Profiles)
+        public async Task<Profiles> PostProfile(Profiles Profiles)
         {
-            return repo.PostProfile(Profiles);
+            return await repo.PostProfile(Profiles);
         }
+
+        
     }
 }

@@ -12,8 +12,8 @@ using Profile.Context;
 namespace Profile.Migrations
 {
     [DbContext(typeof(ProfileContext))]
-    [Migration("20230731101334_h")]
-    partial class h
+    [Migration("20230802115222_he")]
+    partial class he
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,40 @@ namespace Profile.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Profile.Models.Agent", b =>
+                {
+                    b.Property<int>("customer_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("customer_id"));
+
+                    b.Property<string>("agency_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("agent_mobile")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("agent_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("customer_id");
+
+                    b.ToTable("agent");
+                });
 
             modelBuilder.Entity("Profile.Models.Profiles", b =>
                 {

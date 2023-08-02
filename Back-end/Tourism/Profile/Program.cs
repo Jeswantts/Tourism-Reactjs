@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using My_Profile.Service;
 using Profile.Context;
 using Profile.Interface;
+using Profile.Service;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProfileContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
 builder.Services.AddScoped<IProfile, ProfileRepo>();
-builder.Services.AddScoped<IService, ProfileService>();
+builder.Services.AddScoped<IProService, ProfileService>();
+builder.Services.AddScoped<IAgent, AgentRepo>();
+builder.Services.AddScoped<IAgentService, AgentService>();
 
 builder.Services.AddCors(options =>
 {
