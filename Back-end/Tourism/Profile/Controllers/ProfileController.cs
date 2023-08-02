@@ -11,39 +11,29 @@ namespace Profile.Controllers
 
     public class ProfileController : ControllerBase
     {
-        private readonly IProfile _profileRepo;
-        private readonly IDTO _loginService;
+        private readonly IService _loginService;
 
-
-        public ProfileController(IProfile profileRepo, IDTO loginService)
+        public ProfileController(IService loginService)
         {
-            _profileRepo = profileRepo;
             _loginService = loginService;
         }
 
         [HttpGet("All")]
         public async Task<ICollection<Profiles>> GetProfile()
         {
-            return await _profileRepo.GetProfile();
+            return await _loginService.GetProfile();
         }
 
-
-        [HttpPut("{Name}")]
-        public Profiles? PutProfile(string Name, Profiles profile)
+        [HttpDelete("{id}")]
+        public async Task<Profiles> DeleteProfile(int id)
         {
-            return _profileRepo.PutProfile(Name, profile);
-        }
-
-        [HttpDelete("{Name}")]
-        public Profiles? DeleteProfile(string Name)
-        {
-            return _profileRepo.DeleteProfile(Name);
+            return await _loginService.DeleteProfile(id);
         }
 
         [HttpGet("filter/{customer_id}")]
         public async Task<Profiles> GetProfileById(int customer_id)
         {
-            return await _profileRepo.GetProfileById(customer_id);
+            return await _loginService.GetProfileById(customer_id);
         }
 
         [HttpGet("login/{id}")]

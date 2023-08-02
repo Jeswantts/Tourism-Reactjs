@@ -7,9 +7,14 @@ namespace Profile.Interface
     {
         public Task<ICollection<Profiles>> GetProfile();
 
-        public Profiles PutProfile(string Name, Profiles Profiles);
-        public Profiles DeleteProfile(string Name);
+        public Task<Profiles> PutProfile(Profiles Profiles);
+
+        public Task<Profiles> PostProfile(Profiles Profiles);
+
+        public Task<Profiles> DeleteProfile(int id);
 
         public Task<Profiles> GetProfileById(int customer_id);
+
+        public Task<Profiles> GetUser(string email_id);
     }
 }

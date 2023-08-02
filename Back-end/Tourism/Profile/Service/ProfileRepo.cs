@@ -19,31 +19,19 @@ namespace My_Profile.Service
             var Profile = await _pContext.profiles.ToListAsync();
             return Profile;
         }
-        public Profiles PutProfile(string Name, Profiles Profile)
+
+        public async Task<Profiles> DeleteProfile(int id)
         {
             try
             {
-                _pContext.Entry(Profile).State = EntityState.Modified;
-                _pContext.SaveChangesAsync();
-                return Profile;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Profiles DeleteProfile(string Name)
-        {
-            try
-            {
-                Profiles hot = _pContext.profiles.FirstOrDefault(x => x.name == Name);
-
-
-                _pContext.profiles.Remove(hot);
-                _pContext.SaveChanges();
-
+                Profiles hot = await _pContext.profiles.FindAsync(id);
+                if (hot != null)
+                {
+                    _pContext.profiles.Remove(hot);
+                    await _pContext.SaveChangesAsync();
+                }
                 return hot;
+
             }
             catch (Exception)
             {
@@ -55,6 +43,25 @@ namespace My_Profile.Service
         {
             var Profile = await _pContext.profiles.FindAsync(customer_id);
             return Profile;
+        }
+
+        public async Task<Profiles> GetUser(string email_id)
+        {
+            return await _pContext.profiles.FirstOrDefaultAsync(u => u.email_id == email_id);
+        }
+
+        public async Task<Profiles> PostProfile(Profiles Profiles)
+        {
+            _pContext.profiles.Add(Profiles);
+            await _pContext.SaveChangesAsync();
+            return Profiles;
+        }
+
+        public async Task<Profiles> PutProfile(Profiles Profiles)
+        {
+            _pContext.profiles.Update(Profiles);
+            await _pContext.SaveChangesAsync();
+            return Profiles;
         }
     }
 }

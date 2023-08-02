@@ -18,10 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Context\" />
-    <Folder Include="Interface\" />
-    <Folder Include="Service\" />
   </ItemGroup>
 
 </Project>

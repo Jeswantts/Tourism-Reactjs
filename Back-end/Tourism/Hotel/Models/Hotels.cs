@@ -25,7 +25,7 @@ namespace Hotel.Models
 
         public string? amenities { get; set; }
 
-        public string? room_types { get; set; }
+        public string? hotel_types { get; set; }
 
         public string? whats_nearby { get; set; }
 

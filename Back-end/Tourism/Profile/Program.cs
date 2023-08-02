@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProfileContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
 builder.Services.AddScoped<IProfile, ProfileRepo>();
-builder.Services.AddScoped<IDTO, ProfileService>();
+builder.Services.AddScoped<IService, ProfileService>();
 
 builder.Services.AddCors(options =>
 {

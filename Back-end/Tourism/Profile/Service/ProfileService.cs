@@ -12,15 +12,13 @@ using System.Text;
 
 namespace My_Profile.Service
 {
-    public class ProfileService : IDTO
+    public class ProfileService : IService, IProfile
     {
         private readonly IProfile repo;
-        private readonly ProfileContext context;
         private readonly IConfiguration _configuration;
-        public ProfileService(IProfile _repo, ProfileContext context, IConfiguration configuration)
+        public ProfileService(IProfile _repo, IConfiguration configuration)
         {
             repo = _repo;
-            this.context = context;
             _configuration = configuration;
         }
         public async Task<Login_DTO> GetLoginById(int id)
@@ -48,7 +46,7 @@ namespace My_Profile.Service
                 profile.email_id = dto.email_id;
 
 
-            await context.SaveChangesAsync();
+            await repo.PutProfile(profile);
             var loginDTO = new Login_DTO
             {
                 mobile_number = profile.mobile_number,
@@ -60,7 +58,7 @@ namespace My_Profile.Service
 
         public async Task<Profile_DTO> GetProById(int id)
         {
-            Profiles profile = await context.profiles.FindAsync(id);
+            Profiles profile = await repo.GetProfileById(id);
 
             if (profile == null)
             {
@@ -91,7 +89,7 @@ namespace My_Profile.Service
                 profile.gender = dto.gender;
                 profile.marital_status = dto.marital_status;
 
-                await context.SaveChangesAsync();
+            await repo.PutProfile(profile);
 
             var loginDTO = new Profile_DTO
             {
@@ -99,6 +97,7 @@ namespace My_Profile.Service
                 dob = profile.dob,
                 gender = profile.gender, 
                 marital_status = profile.marital_status, 
+                customer_id = profile.customer_id
             };
 
             return loginDTO;
@@ -108,7 +107,7 @@ namespace My_Profile.Service
 
         public async Task<ChangePass_DTO> ChangePassword(int id, string oldPassword, string newPassword)
         {
-            Profiles profile = await context.profiles.FindAsync(id);
+            Profiles profile = await repo.GetProfileById(id);
 
 
             bool isOldPasswordCorrect = PasswordHasher.VerifyPassword(oldPassword, profile.password);
@@ -118,7 +117,7 @@ namespace My_Profile.Service
             }
             string newHashedPassword = PasswordHasher.HashPassword(newPassword);
             profile.password = newHashedPassword;
-            await context.SaveChangesAsync();
+            await repo.PutProfile(profile);
 
             return new ChangePass_DTO
             {
@@ -131,7 +130,7 @@ namespace My_Profile.Service
 
         public async Task<ChangeImg_DTO> UpdateImage(int id, ChangeImg_DTO changeImg_DTO)
         {
-            Profiles profile = await context.profiles.FindAsync(id);
+            Profiles profile = await repo.GetProfileById(id);
 
             if (!string.IsNullOrEmpty(profile.image))
             {
@@ -149,7 +148,7 @@ namespace My_Profile.Service
             }
 
             profile.image = changeImg_DTO.image;
-            await context.SaveChangesAsync();
+            await repo.PutProfile(profile);
             return changeImg_DTO;
         }
 
@@ -162,8 +161,7 @@ namespace My_Profile.Service
                 password = PasswordHasher.HashPassword(register_DTO.password),
             };
 
-            context.profiles.Add(profile);
-            await context.SaveChangesAsync();
+            await repo.PostProfile(profile);
 
             var loginDTO = new Register_DTO
             {
@@ -232,10 +230,34 @@ namespace My_Profile.Service
             }
         }
 
-        private async Task<Profiles> GetUser(string email_id)
+        public async Task<Profiles> GetUser(string email_id)
         {
-            return await context.profiles.FirstOrDefaultAsync(u => u.email_id == email_id);
+            return await repo.GetUser(email_id);
         }
 
+        public async Task<ICollection<Profiles>> GetProfile()
+        {
+            return await repo.GetProfile();
+        }
+
+        public  async Task<Profiles> PutProfile(Profiles Profiles)
+        {
+            return await repo.PutProfile(Profiles);
+        }
+
+        public async Task<Profiles> DeleteProfile(int id)
+        {
+            return await repo.DeleteProfile(id);
+        }
+
+        public async Task<Profiles> GetProfileById(int customer_id)
+        {
+            return await repo.GetProfileById(customer_id);
+        }
+
+        public Task<Profiles> PostProfile(Profiles Profiles)
+        {
+            return repo.PostProfile(Profiles);
+        }
     }
 }
