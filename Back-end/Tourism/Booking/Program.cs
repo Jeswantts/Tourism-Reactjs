@@ -21,7 +21,8 @@ builder.Services.AddSwaggerGen(c =>
     {
         if (apiDesc.ActionDescriptor.RouteValues.TryGetValue("controller", out var controllerName))
         {
-            if (controllerName.Equals("Profile", StringComparison.OrdinalIgnoreCase))
+            if (controllerName.Equals("Profile", StringComparison.OrdinalIgnoreCase)
+                || controllerName.Equals("Agent", StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
@@ -33,6 +34,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<BookingContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
 builder.Services.AddScoped<IBooking, BookingRepo>();
+builder.Services.AddScoped<IBookService, BookingService>();
 
 builder.Services.AddCors(options =>
 {

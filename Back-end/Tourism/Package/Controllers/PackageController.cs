@@ -10,8 +10,8 @@ namespace Package.Controllers
     [ApiController]
     public class PackageController : ControllerBase
     {
-        private readonly IPackage service;
-        public PackageController(IPackage _service)
+        private readonly IPackService service;
+        public PackageController(IPackService _service)
         {
             service = _service;
         }

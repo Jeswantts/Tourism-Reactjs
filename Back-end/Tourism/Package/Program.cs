@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PackageContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
 builder.Services.AddScoped<IPackage, PackageRepo>();
+builder.Services.AddScoped<IPackService, PackageService>();
 
 
 builder.Services.AddCors(options =>

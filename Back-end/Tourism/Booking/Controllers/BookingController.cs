@@ -12,8 +12,8 @@ namespace Booking.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        private readonly IBooking service;
-        public BookingController(IBooking _service)
+        private readonly IBookService service;
+        public BookingController(IBookService _service)
         {
             service = _service;
         }
