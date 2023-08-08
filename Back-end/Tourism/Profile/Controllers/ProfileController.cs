@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Profile.Interface;
 using Profile.Models;
 using Profile.Models.DTO;
@@ -156,7 +157,7 @@ namespace Profile.Controllers
             {
                 var token = await _loginService.Login(userLoginDTO);
 
-                if (!string.IsNullOrEmpty(token))
+                if (token!=null)
                 {
                     return Ok(token);
                 }

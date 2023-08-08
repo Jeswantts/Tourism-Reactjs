@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Profile.Context;
 using Profile.Interface;
@@ -133,14 +134,14 @@ namespace My_Profile.Service
 
             if (!string.IsNullOrEmpty(profile.image))
             {
-                string oldImagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\ka23-tripswel\front-end-react\passenger\public\Img", profile.image);
+                string oldImagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\User", profile.image);
                 if (File.Exists(oldImagePath))
                 {
                     File.Delete(oldImagePath);
                 }
             }
 
-            string imagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\ka23-tripswel\front-end-react\passenger\public\Img", changeImg_DTO.image);
+            string imagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\User", changeImg_DTO.image);
             using (Stream stream = new FileStream(imagePath, FileMode.Create))
             {
                 await changeImg_DTO.file.CopyToAsync(stream);
@@ -198,7 +199,7 @@ namespace My_Profile.Service
         }
 
 
-        public async Task<string> Login(Auth_DTO auth_DTO)
+        public async Task<LoginResponse_DTO> Login(Auth_DTO auth_DTO)
         {
             if (auth_DTO != null && !string.IsNullOrEmpty(auth_DTO.email_id) && !string.IsNullOrEmpty(auth_DTO.password))
             {
@@ -225,17 +226,18 @@ namespace My_Profile.Service
                         expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:TokenExpirationMinutes"])),
                         signingCredentials: signIn);
 
-                    return new JwtSecurityTokenHandler().WriteToken(token);
-                }
-                else
-                {
-                    return null;
+
+                    var response = new LoginResponse_DTO
+                    {
+                        Token = new JwtSecurityTokenHandler().WriteToken(token),
+                        CustomerId = user.customer_id,
+                    };
+
+                    return response;
                 }
             }
-            else
-            {
-                return null;
-            }
+            return null;
+
         }
 
         public async Task<Profiles> GetUser(string email_id)

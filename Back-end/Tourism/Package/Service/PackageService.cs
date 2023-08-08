@@ -4,10 +4,10 @@ using Package.Models;
 
 namespace Package.Service
 {
-    public class PackageService : IPackService, IPackage
+    public class PackageService : IPackService
     {
-        private readonly IPackService service;
-        public PackageService(IPackService service)
+        private readonly IPackage service;
+        public PackageService(IPackage service)
         {
             this.service = service;
         }
@@ -26,9 +26,19 @@ namespace Package.Service
             return await service.DeletePackage(id);
         }
 
+        public async Task<ICollection<Itinerary>> GetItinerary()
+        {
+            return await service.GetItinerary();
+        }
+
         public async Task<Itinerary> GetItineraryById(int id)
         {
             return await service.GetItineraryById(id);
+        }
+
+        public async Task<List<Itinerary>> GetItineraryByPackageId(int id)
+        {
+            return await service.GetItineraryByPackageId(id);
         }
 
         public async Task<Location> GetLocationById(int id)
@@ -36,9 +46,24 @@ namespace Package.Service
             return await service.GetLocationById(id);
         }
 
+        public async Task<ICollection<Location>> GetLocations()
+        {
+            return await service.GetLocations();
+        }
+
         public async Task<Packages> GetPackageById(int id)
         {
             return await service.GetPackageById(id);
+        }
+
+        public async Task<ICollection<Packages>> GetPackages()
+        {
+            return await service.GetPackages();
+        }
+
+        public async Task<List<Packages>> GetPackagesByLocation(int id)
+        {
+            return await service.GetPackagesByLocation(id);
         }
 
         public async Task<Itinerary> PostItinerary(Itinerary itinerary)

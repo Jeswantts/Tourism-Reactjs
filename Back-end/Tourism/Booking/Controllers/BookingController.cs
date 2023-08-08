@@ -1,13 +1,15 @@
 ﻿using Booking.Interface;
 using Booking.Models;
+using Booking.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Profile.Models.DTO;
 using System.Net;
 
 namespace Booking.Controllers
 {   
-    [Authorize (Roles = "user")]
+    //[Authorize (Roles = "user")]
     [Route("api/[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
@@ -24,7 +26,7 @@ namespace Booking.Controllers
         }
 
         [HttpPost("Passenger")]
-        public async Task<IActionResult> Add(Passenger passenger)
+        public async Task<IActionResult> Add(List<Passenger> passenger)
         {
             if (!ModelState.IsValid)
             {
@@ -86,6 +88,42 @@ namespace Booking.Controllers
         public async Task<Bookings> Delete(int id)
         {
             return await service.DeleteBooking(id);
+        }
+
+        [HttpPost("Payment/Carddetail")]
+        public async Task<IActionResult> Payment(Payment payment)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToList();
+                return new BadRequestObjectResult(errors);
+            }
+
+            try
+            {
+                var payments = await service.PostPayment(payment);
+                return Ok(payments);
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(ex.Message)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+        }
+        [HttpPut("Booking/Status/{id}")]
+        public async Task<IActionResult> BookingStatus(int id, BookingStatus_DTO status_DTO)
+        {
+            try
+            {
+                BookingStatus_DTO activate = await service.ChangeStatus(id, status_DTO);
+                return Ok(activate);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred during payment activation: {ex.Message}");
+            }
         }
     }
 }

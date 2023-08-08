@@ -27,7 +27,7 @@ namespace Authentication.Service
 
         public async Task<Image_Gallery> Image(Image_Gallery image_Gallery)
         {
-            string imagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\ka23-tripswel\front-end-react\passenger\public\Img", image_Gallery.image);
+            string imagePath = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\Admin", image_Gallery.image);
             using (Stream stream = new FileStream(imagePath, FileMode.Create))
             {
                 await image_Gallery.file.CopyToAsync(stream);

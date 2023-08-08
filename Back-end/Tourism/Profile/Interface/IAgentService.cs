@@ -15,11 +15,13 @@ namespace Profile.Interface
 
         public Task<Agent> GetAgentById(int customer_id);
 
+        public Task<List<Agent>> GetAgentByStatus(string status);
+
         public Task<Register_DTO> RegisterAgent(Register_DTO register_DTO);
         public Task<AgentProfile_DTO> UpdateAgent(AgentProfile_DTO agentProfile_DTO,int id);
         public Task<Activation_DTO> ActivateAgent(int id,Activation_DTO activation_DTO);
         public Task<ChangePass_DTO> ChangePassword(int id, string oldPassword, string newPassword);
-        public Task<string> Login(Auth_DTO auth_DTO);
+        public Task<LoginResponse_DTO> Login(Auth_DTO auth_DTO);
         public Task<Agent> GetAgent(string email_id);
 
     }

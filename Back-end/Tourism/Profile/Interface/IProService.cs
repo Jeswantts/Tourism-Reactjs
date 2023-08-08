@@ -1,4 +1,5 @@
-﻿using Profile.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Profile.Models;
 using Profile.Models.DTO;
 
 namespace Profile.Interface
@@ -17,7 +18,7 @@ namespace Profile.Interface
         public Task<ChangeImg_DTO> ViewImage(int id);
         public Task<Register_DTO> RegisterUser(Register_DTO register_DTO);
 
-        public Task<string> Login(Auth_DTO auth_DTO);
+        public Task<LoginResponse_DTO> Login(Auth_DTO auth_DTO);
 
         public Task<ICollection<Profiles>> GetProfile();
 

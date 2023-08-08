@@ -5,7 +5,6 @@ namespace Booking.Models
     public class Passenger
     {
         [Key]
-        [Required(ErrorMessage = "Passenger Id is required.")]
         public int passenger_id { get; set; }
 
         [Required(ErrorMessage = "Customer Id is required.")]

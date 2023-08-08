@@ -78,7 +78,7 @@ namespace Package.Service
             {
                 if (location.file != null)
                 {
-                    string path = Path.Combine(@"C:\Users\jeswa\OneDrive\Desktop\Kanini\React\api\public\images", location.image);
+                    string path = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\Agent", location.image);
                     using (Stream stream = new FileStream(path, FileMode.Create))
                     {
                         await location.file.CopyToAsync(stream);
@@ -101,7 +101,7 @@ namespace Package.Service
             {
                 if (itinerary.file != null)
                 {
-                    string path = Path.Combine(@"C:\Users\jeswa\OneDrive\Desktop\Kanini\React\api\public\images", itinerary.image);
+                    string path = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\Agents", itinerary.image);
                     using (Stream stream = new FileStream(path, FileMode.Create))
                     {
                         await itinerary.file.CopyToAsync(stream);
@@ -124,7 +124,7 @@ namespace Package.Service
             {
                 if (packages.file != null)
                 {
-                    string path = Path.Combine(@"C:\Users\jeswa\OneDrive\Desktop\Kanini\React\api\public\images", packages.image);
+                    string path = Path.Combine(@"C:\Users\Suchitra\source\repos\Kanini-Tourism\Front-end\tourism\public\Agent", packages.image);
                     using (Stream stream = new FileStream(path, FileMode.Create))
                     {
                         await packages.file.CopyToAsync(stream);
@@ -139,6 +139,31 @@ namespace Package.Service
             {
                 throw new ApplicationException("Error creating packages.", ex);
             }
+        }
+
+        public async Task<ICollection<Location>> GetLocations()
+        {
+            return await context.locations.ToListAsync();
+        }
+
+        public async Task<ICollection<Packages>> GetPackages()
+        {
+            return await context.packages.ToListAsync();
+        }
+
+        public async Task<ICollection<Itinerary>> GetItinerary()
+        {
+            return await context.itinerary.ToListAsync();
+        }
+
+        public async Task<List<Packages>> GetPackagesByLocation(int id)
+        {
+            return await context.packages.Where(p => p.location_id == id).ToListAsync();
+        }
+
+        public async Task<List<Itinerary>> GetItineraryByPackageId(int id)
+        {
+            return await context.itinerary.Where(p=>p.package_id == id).ToListAsync();
         }
 
     }

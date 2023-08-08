@@ -61,7 +61,7 @@ namespace Profile.Controllers
             {
                 var token = await _Service.Login(userLoginDTO);
 
-                if (!string.IsNullOrEmpty(token))
+                if (token!=null)
                 {
                     return Ok(token);
                 }
@@ -102,7 +102,7 @@ namespace Profile.Controllers
             return Ok(doctorDto);
         }
 
-        [Authorize(Roles = "agent")]
+        //[Authorize(Roles = "agent")]
         [HttpPut("Activation/{id}")]
         public async Task<IActionResult> ActivateAgent(int id, Activation_DTO activation_DTO)
         {
@@ -115,6 +115,12 @@ namespace Profile.Controllers
             {
                 return StatusCode(500, $"An error occurred during doctor activation: {ex.Message}");
             }
+        }
+
+        [HttpGet("GetAgent/Status/{status}")]
+        public async Task<List<Agent>> GetAgentsStatus(string status)
+        {
+            return await _Service.GetAgentByStatus(status);
         }
     }
 }

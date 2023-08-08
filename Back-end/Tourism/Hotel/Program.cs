@@ -1,4 +1,6 @@
 using Hotel.Context;
+using Hotel.Interface;
+using Hotel.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HotelContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
+builder.Services.AddScoped<IHotel, HotelRepo>();
+builder.Services.AddScoped<IHotelService, HotelService>();
 
 
 builder.Services.AddCors(options =>

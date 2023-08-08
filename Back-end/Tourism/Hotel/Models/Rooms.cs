@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hotel.Models
 {
     public class Rooms
     {
         [Key]
-        [Required(ErrorMessage = "Room ID is required")]
         public int room_id { get; set; }
 
         [Required(ErrorMessage = "Hotel ID is required")]
@@ -22,5 +22,7 @@ namespace Hotel.Models
 
         [RegularExpression("^(available|unavailable)$", ErrorMessage = "Invalid availability. Must be 'available' or 'unavailable'.")]
         public string? availability { get; set; }
+        [NotMapped]
+        public IFormFile file { get; set; }
     }
 }

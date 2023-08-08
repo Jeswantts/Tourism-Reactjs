@@ -15,6 +15,22 @@ namespace Package.Controllers
         {
             service = _service;
         }
+        [HttpGet("Location/getall")]
+        public async Task<ICollection<Location>> GetLocation()
+        {
+            return await service.GetLocations();
+        }
+        [HttpGet("Packages")]
+        public async Task<ICollection<Packages>> GetPackages()
+        {
+            return await service.GetPackages();
+        }
+        [HttpGet("Itinerary/get/all")]
+        public async Task<ICollection<Itinerary>> GetItinerary()
+        {
+            return await service.GetItinerary();
+        }
+
         [HttpGet("Location/{id}")]
         public async Task<Location> GetId(int id)
         {
@@ -48,8 +64,18 @@ namespace Package.Controllers
             return await service.GetPackageById(id);
         }
 
+        [HttpGet("GetPackage/ByLocationId/{id}")]
+        public async Task<List<Packages>> GetPackageByLocId(int id)
+        {
+            return await service.GetPackagesByLocation(id);
+        }
+        [HttpGet("GetItinerary/ByPackageId/{id}")]
+        public async Task<List<Itinerary>> GetItineraryByLocId(int id)
+        {
+            return await service.GetItineraryByPackageId(id);
+        }
         [HttpPost("Packages")]
-        public async Task<IActionResult> PostPackages([FromForm]Packages packages)
+        public async Task<ActionResult<Packages>> PostPackages([FromForm]Packages packages)
         {
             try
             {
@@ -77,7 +103,7 @@ namespace Package.Controllers
         }
 
         [HttpPost("Itinerary")]
-        public async Task<IActionResult> PostItinerary([FromForm]Itinerary itinerary)
+        public async Task<ActionResult<Itinerary>> PostItinerary([FromForm]Itinerary itinerary)
         {
             try
             {

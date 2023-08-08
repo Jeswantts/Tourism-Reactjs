@@ -50,9 +50,9 @@ namespace Booking.Service
             return passenger;
         }
 
-        public async Task<Passenger> Post(Passenger passenger)
+        public async Task<List<Passenger>> Post(List<Passenger> passenger)
         {
-            context.passengers.Add(passenger);
+            context.passengers.AddRange(passenger);
             await context.SaveChangesAsync();
             return passenger;
         }
@@ -60,6 +60,20 @@ namespace Booking.Service
         public async Task<Bookings> PostBooking(Bookings bookings)
         {
             context.bookings.Add(bookings);
+            await context.SaveChangesAsync();
+            return bookings;
+        }
+
+        public async Task<Payment> PostPayment(Payment payment)
+        {
+            context.payment.Add(payment);
+            await context.SaveChangesAsync();
+            return payment;
+        }
+
+        public async Task<Bookings> PutBooking(Bookings bookings)
+        {
+            context.bookings.Update(bookings);
             await context.SaveChangesAsync();
             return bookings;
         }

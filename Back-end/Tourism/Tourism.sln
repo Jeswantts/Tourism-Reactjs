@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profile", "Profile\Profile.csproj", "{48B91200-FC2F-424C-B0F2-422A8718A8D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Profile", "Profile\Profile.csproj", "{48B91200-FC2F-424C-B0F2-422A8718A8D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Package", "Package\Package.csproj", "{B3D61E5E-35C1-4784-B8EE-CE9CAD186EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Package", "Package\Package.csproj", "{B3D61E5E-35C1-4784-B8EE-CE9CAD186EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feedback", "Feedback\Feedback.csproj", "{EBA41162-1527-49BD-80DB-FA739089C48E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feedback", "Feedback\Feedback.csproj", "{EBA41162-1527-49BD-80DB-FA739089C48E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel", "Hotel\Hotel.csproj", "{8CAC7596-CE57-4995-9BB0-6E898D719F02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel", "Hotel\Hotel.csproj", "{8CAC7596-CE57-4995-9BB0-6E898D719F02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking", "Booking\Booking.csproj", "{B6925A68-6918-4E55-ABD5-7C90CD42B67D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking", "Booking\Booking.csproj", "{B6925A68-6918-4E55-ABD5-7C90CD42B67D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{AC8BC042-CBBB-4C33-9379-EDA9EB632F80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentication\Authentication.csproj", "{AC8BC042-CBBB-4C33-9379-EDA9EB632F80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileTesting", "ProfileTesting\ProfileTesting.csproj", "{F16A1E9C-C0E6-4BA1-A55F-30348CA85F2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AC8BC042-CBBB-4C33-9379-EDA9EB632F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC8BC042-CBBB-4C33-9379-EDA9EB632F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC8BC042-CBBB-4C33-9379-EDA9EB632F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F16A1E9C-C0E6-4BA1-A55F-30348CA85F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16A1E9C-C0E6-4BA1-A55F-30348CA85F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16A1E9C-C0E6-4BA1-A55F-30348CA85F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16A1E9C-C0E6-4BA1-A55F-30348CA85F2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hotel.Models
 {
@@ -30,5 +31,7 @@ namespace Hotel.Models
         public string? whats_nearby { get; set; }
 
         public string? policies { get; set; }
+        [NotMapped]
+        public IFormFile file { get; set; }
     }
 }

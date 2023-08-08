@@ -33,20 +33,51 @@ namespace Booking.Migrations
                     b.Property<DateTime>("booking_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("checkin")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("contact")
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("checkout")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("customer_id")
+                        .HasColumnType("int");
 
-                    b.Property<int>("hotel_id")
+                    b.Property<string>("duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("location_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("location_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("num_passengers")
                         .HasColumnType("int");
 
                     b.Property<int>("package_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("room_id")
-                        .HasColumnType("int");
+                    b.Property<string>("package_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("passenger_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("passenger_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("total_price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("booking_id");
 
@@ -92,6 +123,39 @@ namespace Booking.Migrations
                     b.HasKey("passenger_id");
 
                     b.ToTable("passengers");
+                });
+
+            modelBuilder.Entity("Booking.Models.Payment", b =>
+                {
+                    b.Property<int>("payment_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("payment_id"));
+
+                    b.Property<string>("card_number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cardholder_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cvv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("expiry_month")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("expiry_year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("payment_id");
+
+                    b.ToTable("payment");
                 });
 #pragma warning restore 612, 618
         }

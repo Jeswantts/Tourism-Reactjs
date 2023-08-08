@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Profile.Service
 {
-    public class AgentService : IAgentService,IAgent
+    public class AgentService : IAgentService
     {
         private readonly IAgent repo;
         private readonly IConfiguration _configuration;
@@ -127,12 +127,12 @@ namespace Profile.Service
             };
         }
 
-        public async Task<string> Login(Auth_DTO auth_DTO)
+        public async Task<LoginResponse_DTO> Login(Auth_DTO auth_DTO)
         {
             if (auth_DTO != null && !string.IsNullOrEmpty(auth_DTO.email_id) && !string.IsNullOrEmpty(auth_DTO.password))
             {
                 var user = await GetAgent(auth_DTO.email_id);
-                if (user != null && PasswordHasher.VerifyPassword(auth_DTO.password, user.password))
+                if (user != null && user.status== "activated" && PasswordHasher.VerifyPassword(auth_DTO.password, user.password))
                 {
                     var claims = new[]
                 {
@@ -154,22 +154,29 @@ namespace Profile.Service
                         expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:TokenExpirationMinutes"])),
                         signingCredentials: signIn);
 
-                    return new JwtSecurityTokenHandler().WriteToken(token);
-                }
-                else
-                {
-                    return null;
+                    var response = new LoginResponse_DTO
+                    {
+                        Token = new JwtSecurityTokenHandler().WriteToken(token),
+                        CustomerId = user.customer_id,
+                    };
+
+                    return response;
                 }
             }
-            else
-            {
-                return null;
-            }
+            return null;
+
         }
 
         public async Task<Agent> GetAgent(string email_id)
         {
             return await repo.GetAgent(email_id);
+        }
+
+        public async Task<List<Agent>> GetAgentByStatus(string status)
+        {
+            var agent = await repo.GetAgent();
+            var filter = agent.Where(a => a.status == status);
+            return filter.ToList();
         }
     }
 }
