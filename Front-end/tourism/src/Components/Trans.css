@@ -1,0 +1,41 @@
+
+.hidden {
+    transform: translateY(-100%);
+  }
+  
+  .AppBar {
+    transition: transform 0.3s;
+  }
+
+.hidden {
+    transform: translateY(-100%);
+  }
+  
+  /* Apply transition effect for smooth animation */
+  .AppBar {
+    transition: transform 0.3s;
+  }
+  
+  /* Center the navigation brand both vertically and horizontally */
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* Adjust the height as needed */
+  }
+  .overlay-content {
+    z-index: 1; /* Adjust this value as needed */
+    /* ... Other styles for the overlay ... */
+  }
+  /* Hide navigation links on screens smaller than 600px width */
+  @media (max-width: 600px) {
+    .nav-links {
+      display: none;
+    }
+  }
+
+
+
+  
+  
+  
