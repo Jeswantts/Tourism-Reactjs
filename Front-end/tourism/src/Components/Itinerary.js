@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Box, Typography, TextField, Button,TextareaAutosize } from '@mui/material';
 import HotelIcon from '@mui/icons-material/Hotel';
+import { toast } from 'react-toastify';
 
 const Itinerary = () => {
   const [itineraryData, setItineraryData] = useState({
@@ -24,8 +25,10 @@ const Itinerary = () => {
     try {
       const response = await axios.get('https://localhost:7114/api/Package/Itinerary/get/all');
       setItineraries(response.data);
+      toast.success('Succesfull')
     } catch (error) {
       console.error('Error fetching itineraries:', error);
+      toast.error('Failed')
     }
   };
 

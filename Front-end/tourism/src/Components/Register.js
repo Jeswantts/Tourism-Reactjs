@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Typography, TextField, Container, Paper, Grid, Button, Switch } from '@mui/material';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -34,10 +35,12 @@ const Register = () => {
         .post('https://localhost:7258/api/Profile/register', formData)
         .then((response) => {
           console.log('User Registration successful:', response.data);
+          toast.success('Reg Succesfully')
           // Redirect to login page or handle registration success
         })
         .catch((error) => {
           console.error('User Registration failed:', error);
+          toast.error('Error reg')
           // Handle registration failure
         });
     } else if (formData.role === 'agent') {
@@ -45,10 +48,12 @@ const Register = () => {
         .post('https://localhost:7258/api/Agent/register', formData)
         .then((response) => {
           console.log('Agent Registration successful:', response.data);
+          toast.success('Reg Success')
           // Redirect to login page or handle registration success
         })
         .catch((error) => {
           console.error('Agent Registration failed:', error);
+          toast.error('Reg Failed')
           // Handle registration failure
         });
     }

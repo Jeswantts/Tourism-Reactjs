@@ -11,6 +11,7 @@ import {
   Grid,
 } from '@mui/material';
 import HotelIcon from '@mui/icons-material/Hotel';
+import { toast } from 'react-toastify';
 
 const Hotel = () => {
   const [hotelData, setHotelData] = useState({
@@ -67,10 +68,12 @@ const Hotel = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Hotel added successfully:', data);
+        toast.success('Created')
         // Handle success or show a success message to the user
       })
       .catch((error) => {
         console.error('Error adding hotel:', error);
+        toast.error('Failed')
         // Handle error or show an error message to the user
       });
   };

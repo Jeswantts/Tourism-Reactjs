@@ -13,7 +13,7 @@ using System.Text;
 
 namespace My_Profile.Service
 {
-    public class ProfileService : IProService, IProfile
+    public class ProfileService : IProService
     {
         private readonly IProfile repo;
         private readonly IConfiguration _configuration;

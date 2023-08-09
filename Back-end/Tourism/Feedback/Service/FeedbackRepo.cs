@@ -64,12 +64,12 @@ namespace Feedback.Service
             }
         }
 
-        public Rating PostRating(Rating Rating)
+        public async Task<Rating> PostRating(Rating Rating)
         {
             try
             {
-                _Context.rating.Add(Rating);
-                _Context.SaveChanges();
+                 _Context.rating.Add(Rating);
+                 _Context.SaveChanges();
                 return Rating;
             }
 
@@ -77,6 +77,16 @@ namespace Feedback.Service
             {
                 return null;
             }
+        }
+
+        public async Task<List<decimal>> GetRatingValues(int packageId)
+        {
+            List<decimal> ratingValues = await _Context.rating
+                .Where(r => r.package_id == packageId)
+                .Select(r => r.rating) 
+                .ToListAsync();
+
+            return ratingValues;
         }
 
     }

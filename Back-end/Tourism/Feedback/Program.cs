@@ -1,4 +1,6 @@
 using Feedback.Context;
+using Feedback.Interface;
+using Feedback.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FeedbackContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("jeswant")));
-
+builder.Services.AddScoped<IFeedback, FeedbackRepo>();
+builder.Services.AddScoped<IFeedService, FeedbackService>();
 
 builder.Services.AddCors(options =>
 {

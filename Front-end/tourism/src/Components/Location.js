@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Container, Typography, TextField, Button, Grid } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { toast } from 'react-toastify';
 
 const Location = () => {
   const [location, setLocation] = useState({
@@ -40,9 +41,11 @@ const Location = () => {
       });
 
       console.log('Location created:', response.data);
+      toast.success('Created')
       fetchLocations();
     } catch (error) {
       console.error('Error creating location:', error);
+      toast.error('failed')
     }
   };
 

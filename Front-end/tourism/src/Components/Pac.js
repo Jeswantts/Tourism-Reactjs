@@ -3,6 +3,8 @@ import { useLocation, Link } from 'react-router-dom';
 import { usePackageContext } from '../Context/PackageContext';
 import { useCustomerId } from '../Context/CustomerIdContext';
 import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+import axios from 'axios';
+import Ratestar from './Ratestar';
 
 const Pac = () => {
   const [packages, setPackages] = useState([]);
@@ -12,6 +14,11 @@ const Pac = () => {
   const locationName = searchParams.get('locationName');
   const { setSelectedPackage } = usePackageContext();
   const { customerId } = useCustomerId();
+  const [packageDetails, setPackageDetails] = useState([]);
+
+
+  const [averageRating, setAverageRating] = useState(0);
+
 
   useEffect(() => {
     if (locationId) {
@@ -25,6 +32,25 @@ const Pac = () => {
         });
     }
   }, [locationId]);
+
+  useEffect(() => {
+    // Fetch additional details for each package
+    if (packages.length > 0) {
+      const averageRatingPromises = packages.map(pkg =>
+        fetch(`https://localhost:7266/api/Feedback/average/${pkg.package_id}`)
+          .then(response => response.json())
+          .catch(error => {
+            console.error(`Error fetching average rating for package ${pkg.package_id}:`, error);
+            return null;
+          })
+      );
+  
+      Promise.all(averageRatingPromises).then(averageRatings => {
+        setPackageDetails(averageRatings);
+      });
+    }
+  }, [packages]);
+  
 
   const handlePackageSelect = (selectedPackage) => {
     setSelectedPackage(selectedPackage);
@@ -41,7 +67,7 @@ const Pac = () => {
         }}
       >
         {packages.length > 0 ? (
-          packages.map((pkg) => (
+          packages.map((pkg,index) => (
             <Card key={pkg.package_id} className="card">
               <CardMedia
                 component="img"
@@ -66,6 +92,7 @@ const Pac = () => {
                 <Typography variant="body2" gutterBottom>
                   <strong>Budget:</strong> {pkg.budget}
                 </Typography>
+                <Ratestar rating={packageDetails[index] || 0}  />
                 <Link
                   to={`/Loc/Pac/${locationId}/Itinerary/${pkg.package_id}?locationName=${encodeURIComponent(
                     locationName

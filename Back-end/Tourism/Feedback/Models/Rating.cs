@@ -7,6 +7,7 @@ namespace Feedback.Models
         [Key]
         [Required(ErrorMessage = "Rating ID is required")]
         public int rating_id { get; set; }
+        public int package_id { get; set; }
 
         public string? customer_name { get; set; }
 
@@ -17,7 +18,7 @@ namespace Feedback.Models
 
         public string? description { get; set; }
 
-        [Range(0, 5, ErrorMessage = "Cleanliness rating must be between 0 and 5")]
+        [Range(0, 5, ErrorMessage = "Rating must be between 0 and 5")]
         public decimal rating { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace Feedback.Interface
 
         public IEnumerable<Rating> GetRating();
         public Rating GetRatingById(int rating_id);
-        public Rating PostRating(Rating Rating);
+        public Task<List<decimal>> GetRatingValues(int packageId);
+        public Task<Rating> PostRating(Rating Rating);
     }
 }

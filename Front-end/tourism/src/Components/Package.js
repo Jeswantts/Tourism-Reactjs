@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+import { toast } from 'react-toastify';
 
 const Package = () => {
   const [packageData, setPackageData] = useState({
@@ -56,10 +57,12 @@ const Package = () => {
       });
 
       console.log('Package created:', response.data);
+      toast.success('Package created')
 
       fetchPackages();
     } catch (error) {
       console.error('Error creating package:', error);
+      toast.error('Failed')
 
     }
   };

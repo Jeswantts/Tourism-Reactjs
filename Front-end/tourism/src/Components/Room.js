@@ -9,6 +9,7 @@ import {
   Grid
 } from '@mui/material';
 import HotelIcon from '@mui/icons-material/Hotel';
+import { toast } from 'react-toastify';
 
 
 const Room = () => {
@@ -57,9 +58,11 @@ const Room = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Room added successfully:', data);
+        toast.success('Room created')
       })
       .catch((error) => {
         console.error('Error adding room:', error);
+        toast.error('Error')
       });
   };
 

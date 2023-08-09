@@ -5,6 +5,7 @@ import { useCustomerId } from '../Context/CustomerIdContext';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Typography, TextField, Container, Paper, Grid, Switch, Button } from '@mui/material';
+import { toast } from 'react-toastify';
 
 const Userlogin = () => {
   const [email_id, setEmail] = useState('');
@@ -25,10 +26,12 @@ const Userlogin = () => {
           console.log('Token:', token);
           setCustomerId(customerId);
           login(token);
+          toast.success('Welcome Agent');
           navigate('/Agentdash');
         })
         .catch((response) => {
           console.error('Agent Login failed:', response.error);
+          toast.error('U r not Activated/Invalid credentials');
         });
     } else {
       axios
@@ -40,10 +43,12 @@ const Userlogin = () => {
           console.log('Token:', token);
           setCustomerId(customerId);
           login(token);
+          toast.success('Welcome User');
           navigate('/Profile');
         })
         .catch((error) => {
           console.error('User Login failed:', error);
+          toast.error('Invalid Credentials');
         });
     }
   };
